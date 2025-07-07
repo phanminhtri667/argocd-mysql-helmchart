@@ -4,9 +4,14 @@ metadata:
   name: mysql-slave-init
 data:
   init-slave.sql: |
+    STOP SLAVE;
+
     CHANGE MASTER TO
       MASTER_HOST='mysql-master',
-      MASTER_USER='{{ .Values.mysql.replicationUser }}',
-      MASTER_PASSWORD='{{ .Values.mysql.replicationPassword }}',
-      MASTER_AUTO_POSITION = 1;
+      MASTER_PORT=3306,
+      MASTER_USER='repl',
+      MASTER_PASSWORD='replpass',
+      MASTER_LOG_FILE='binlog.000002',
+      MASTER_LOG_POS=157;
+
     START SLAVE;
