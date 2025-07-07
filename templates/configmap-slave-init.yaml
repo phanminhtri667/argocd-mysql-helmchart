@@ -12,6 +12,6 @@ data:
       MASTER_USER='repl',
       MASTER_PASSWORD='replpass',
       MASTER_LOG_FILE='binlog.000002',
-      MASTER_LOG_POS=157;
+      MASTER_LOG_POS=992;
 
     START SLAVE;
