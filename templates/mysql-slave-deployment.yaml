@@ -2,19 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-slave
+  labels:
+    app: mysql
+    role: slave
 spec:
   replicas: {{ .Values.mysql.replicas }}
   selector:
     matchLabels:
+      app: mysql
       role: slave
   template:
     metadata:
       labels:
+        app: mysql
         role: slave
     spec:
       containers:
         - name: mysql
           image: {{ .Values.mysql.image }}
+          ports:
+            - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
@@ -31,16 +38,10 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_REPLICATION_PASSWORD
-          ports:
-            - containerPort: 3306
           volumeMounts:
-            #- name: data
-            #  mountPath: /var/lib/mysql
             - name: init-script
               mountPath: /docker-entrypoint-initdb.d
       volumes:
-        #- name: data
-        #  emptyDir: {}
         - name: init-script
           configMap:
             name: mysql-slave-init
