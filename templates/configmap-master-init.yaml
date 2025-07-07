@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-master-init
+data:
+  init-master.sql: |
+    CREATE USER 'repl'@'%' IDENTIFIED BY '{{ .Values.mysql.replicationPassword }}';
+    GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
+    FLUSH PRIVILEGES;

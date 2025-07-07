@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-slave-init
+data:
+  init-slave.sql: |
+    CHANGE MASTER TO
+      MASTER_HOST='mysql-master',
+      MASTER_USER='{{ .Values.mysql.replicationUser }}',
+      MASTER_PASSWORD='{{ .Values.mysql.replicationPassword }}',
+      MASTER_AUTO_POSITION = 1;
+    START SLAVE;
