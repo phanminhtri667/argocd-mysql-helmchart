@@ -4,4 +4,4 @@ mysql:
   replicationUser: repl
   replicationPassword: replpass
   database: mydb
-  replicas: 2
+  replicas: 1
