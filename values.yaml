@@ -1,0 +1,7 @@
+mysql:
+  image: mysql:8.0
+  rootPassword: rootpass
+  replicationUser: repl
+  replicationPassword: replpass
+  database: mydb
+  replicas: 2
