@@ -23,8 +23,6 @@ spec:
                   key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
               value: {{ .Values.mysql.database }}
-            - name: MYSQL_SERVER_ID
-              value: "1"
           ports:
             - containerPort: 3306
           #volumeMounts:
@@ -33,9 +31,12 @@ spec:
           volumeMounts:
             - name: init-script
               mountPath: /docker-entrypoint-initdb.d
+            - name: config
+              mountPath: /etc/mysql/conf.d
       volumes:
-        #- name: data
-        #  emptyDir: {}
         - name: init-script
           configMap:
             name: mysql-master-init
+        - name: config
+          configMap:
+            name: mysql-master-conf

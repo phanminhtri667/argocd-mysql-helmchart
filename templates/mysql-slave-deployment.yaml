@@ -38,12 +38,15 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_REPLICATION_PASSWORD
-            - name: MYSQL_SERVER_ID
-              value: "2"
           volumeMounts:
             - name: init-script
               mountPath: /docker-entrypoint-initdb.d
+            - name: config
+              mountPath: /etc/mysql/conf.d
       volumes:
         - name: init-script
           configMap:
             name: mysql-slave-init
+        - name: config
+          configMap:
+            name: mysql-slave-conf

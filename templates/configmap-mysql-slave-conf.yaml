@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-slave-conf
+data:
+  server-id.cnf: |
+    [mysqld]
+    server-id=2
+    log-bin=mysql-bin
+    relay-log=mysql-relay-bin

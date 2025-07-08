@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-master-conf
+data:
+  server-id.cnf: |
+    [mysqld]
+    server-id=1
+    log-bin=mysql-bin
