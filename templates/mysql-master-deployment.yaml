@@ -23,6 +23,8 @@ spec:
                   key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
               value: {{ .Values.mysql.database }}
+            - name: MYSQL_SERVER_ID
+              value: "1"
           ports:
             - containerPort: 3306
           #volumeMounts:
