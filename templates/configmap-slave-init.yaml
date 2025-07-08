@@ -11,7 +11,7 @@ data:
       MASTER_PORT=3306,
       MASTER_USER='repl',
       MASTER_PASSWORD='replpass',
-      MASTER_LOG_FILE='binlog.000002',
+      MASTER_LOG_FILE='binlog.000003',
       MASTER_LOG_POS=157;
 
     START SLAVE;
