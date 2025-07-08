@@ -25,14 +25,13 @@ spec:
               value: {{ .Values.mysql.database }}
           ports:
             - containerPort: 3306
-          #volumeMounts:
-          #  - name: data
-          #    mountPath: /var/lib/mysql
           volumeMounts:
             - name: init-script
               mountPath: /docker-entrypoint-initdb.d
             - name: config
               mountPath: /etc/mysql/conf.d
+            - name: mysql-data
+              mountPath: /var/lib/mysql
       volumes:
         - name: init-script
           configMap:
@@ -40,3 +39,6 @@ spec:
         - name: config
           configMap:
             name: mysql-master-conf
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-master-pvc
